@@ -1,18 +1,19 @@
-function startTime() {
-  const a = new Date();
-  let h = a.getHours();
-  let m = a.getMinutes();
-  let s = a.getSeconds();
-  m = checkTime(m);
-  s = checkTime(s);
-  h=checkTime(h) 
-  document.getElementById('txt').innerHTML = h + ":" + m + ":" + s;
-  setTimeout(startTime, 1000);
-}
+submit.addEventListener("click", (e) => {
+  e.preventDefault()
+  let titlec = title.value
+  let descc = desc.value
+  localStorage.setItem("todo", JSON.stringify([titlec, descc]))
+  console.log(e)
+  todo.innerHTML = `
+  <h1>${titlec} </h1>
+  <p> ${descc}</p>
+  `
+  title.value = ""
+  desc.value = ""
+})
 
-function checkTime(i) {
-  if (i < 10) {
-    i = "0" + i;
-  }
-  return i;
-}
+deleteBtn.addEventListener("click", (e) => {
+  e.preventDefault()
+  localStorage.removeItem("todo")
+  todo.innerHTML = ""
+})
